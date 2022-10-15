@@ -47,7 +47,8 @@ while True:
 
         sg.popup_scrolled (
         
-        
+      
+            
         'Directions from ' + values[0] + ' to ' + values[1],
         "Trip Duration: " + (json_data["route"]["formattedTime"]),
         "Kilometer: " + str ("{:.2f}".format((json_data["route"]["distance"])*1.61)),
