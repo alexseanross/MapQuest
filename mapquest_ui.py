@@ -5,25 +5,25 @@ import datetime
 
 main_api = "https://www.mapquestapi.com/directions/v2/route?"
 key = "rT6wCu7ekTjG9wRb42Cg4NBJ1SkuF8hs"
-sg.theme("DarkAmber")
+sg.theme("DarkAmber") #"sg" is the object for the simpoleGUI
 
 x = datetime.datetime.now()
-
+#contains the layout for GUI
 layout = [
 
     [sg.Text(x.strftime("%X"))],
     [sg.Text(x.strftime("%A, %B %d"))],
     [sg.Text('Find out how to get to your destination!')],
-    [sg.Text('Your location:', size =(15, 1)), sg.InputText()],
-    [sg.Text('Where to?', size =(15, 1)), sg.InputText()],
+    [sg.Text('Your location:', size =(15, 1)), sg.InputText()],#input is automatically assigned to value array
+    [sg.Text('Where to?', size =(15, 1)), sg.InputText()],#input is automatically assigned to value array
     [sg.Submit("Go"), sg.Cancel()]
 
 ]
 
-window = sg.Window('Get Directions', layout)
+window = sg.Window('Get Directions', layout)#window is sg calling layout. 'Get Directions' is the name of the window
 
 while True: 
-    event, values = window.read()
+    event, values = window.read() # Call window as event
     url = main_api + urllib.parse.urlencode({"key":key, "from":values[0], "to":values[1]})
     window.close()
 
