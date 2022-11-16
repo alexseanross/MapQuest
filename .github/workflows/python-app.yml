@@ -28,7 +28,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install PySimpleGUI
         python -m pip install requests
-        pip install pycopy-urllib.parse
         pip install datetime
     - name: Run
       run: |
