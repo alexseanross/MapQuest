@@ -16,6 +16,7 @@ mapquest_api = "https://www.mapquestapi.com/directions/v2/route?"
 sg.theme("BlueMono") #"sg" is the object for the simpoleGUI
 
 x = datetime.datetime.now()
+
 #contains the layout for GUI
 layout = [
 
@@ -24,7 +25,7 @@ layout = [
     [sg.Text('Find out how to get to your destination!')],
     [sg.Text('Your location:', size =(15, 1)), sg.InputText()],#input is automatically assigned to value array
     [sg.Text('Where to?', size =(15, 1)), sg.InputText()],#input is automatically assigned to value array
-    [sg.Submit("Go"), sg.Cancel()]
+    [sg.Submit("Go"), sg.Cancel("Cancel")]
 
 ]
 
@@ -64,7 +65,8 @@ while True:
         title = "Travel Information"
         )
         
-
+    elif event == 'Cancel' or event == None:
+        break
             
     elif json_status == 402:
             print("Status Code: " + str(json_status) + "; Invalid user inputs for one or both locations.")
@@ -85,6 +87,10 @@ while True:
                 title = "Something went wrong"
                 
                 )
+    
+    elif event == 'Cancel' or event == None:
+        break
+
 
     else:
             print("For Staus Code: " + str(json_status) + "; Refer to:")
