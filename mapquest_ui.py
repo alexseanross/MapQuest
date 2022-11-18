@@ -4,14 +4,14 @@ import requests
 import json
 import datetime
 
-main_api = "https://www.mapquestapi.com/directions/v2/route?"
-key = "rT6wCu7ekTjG9wRb42Cg4NBJ1SkuF8hs"
 
 # Enter your API key here
-api_key = "e6e32084500535420729103249e1b405"
+openweather_key = "e6e32084500535420729103249e1b405"
+mapquest_key = "rT6wCu7ekTjG9wRb42Cg4NBJ1SkuF8hs"
  
-# base_url variable to store url
-base_url = "http://api.openweathermap.org/data/2.5/weather?"
+# API
+openwather_api = "http://api.openweathermap.org/data/2.5/weather?"
+mapquest_api = "https://www.mapquestapi.com/directions/v2/route?"
 
 sg.theme("BlueMono") #"sg" is the object for the simpoleGUI
 
@@ -32,7 +32,7 @@ window = sg.Window('Get Directions', layout)#window is sg calling layout. 'Get D
 
 while True: 
     event, values = window.read() # Call window as event
-    url = main_api + urllib.parse.urlencode({"key":key, "from":values[0], "to":values[1]})
+    url = mapquest_api + urllib.parse.urlencode({"key":mapquest_key, "from":values[0], "to":values[1]})
     window.close()
 
     json_data = requests.get(url).json()
