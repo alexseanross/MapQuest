@@ -7,6 +7,12 @@ import datetime
 main_api = "https://www.mapquestapi.com/directions/v2/route?"
 key = "rT6wCu7ekTjG9wRb42Cg4NBJ1SkuF8hs"
 
+# Enter your API key here
+api_key = "e6e32084500535420729103249e1b405"
+ 
+# base_url variable to store url
+base_url = "http://api.openweathermap.org/data/2.5/weather?"
+
 sg.theme("BlueMono") #"sg" is the object for the simpoleGUI
 
 x = datetime.datetime.now()
