@@ -38,7 +38,6 @@ while True:
         "Directions from: " + values[0] + " to " + values[1],
         "Trip Duration: " + (json_data["route"]["formattedTime"]),
         "Kilometers: " + str("{:.2f}".format((json_data["route"]["distance"])*1.61)),
-        "Fuel Used (Ltr): " + str("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78)),
         directions = " "
         for each in json_data["route"]["legs"][0]["maneuvers"]:
             print ((each["narrative"]) + " (" + str ("{:.2f}".format ((each["distance"])*1.61) + " km) "))
@@ -52,7 +51,6 @@ while True:
         'Directions from ' + values[0] + ' to ' + values[1],
         "Trip Duration: " + (json_data["route"]["formattedTime"]),
         "Kilometer: " + str ("{:.2f}".format((json_data["route"]["distance"])*1.61)),
-        "Fuel Used (Ltr): " + str ("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78)),
         directions,
         size = (70,15),
         title = "Travel Information"
@@ -60,7 +58,6 @@ while True:
         
 
             
-
     elif json_status == 402:
             print("Status Code: " + str(json_status) + "; Invalid user inputs for one or both locations.")
             
