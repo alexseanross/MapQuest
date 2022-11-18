@@ -26,6 +26,10 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        pip install PySimpleGUI
+        pip3 install urllib3 
+        python -m pip install requests
+        pip install DateTime
     - name: Run
       run: |
         python3 mapquest_ui.py
