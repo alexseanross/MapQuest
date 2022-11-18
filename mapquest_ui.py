@@ -58,7 +58,8 @@ while True:
         title = "Travel Information"
         )
         
-
+    elif event == "Cancel" or event == None:
+     break
             
     elif json_status == 402:
             print("Status Code: " + str(json_status) + "; Invalid user inputs for one or both locations.")
