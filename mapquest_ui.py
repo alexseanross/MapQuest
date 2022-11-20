@@ -45,6 +45,9 @@ while True:
     response = requests.get(weather_url)
     data = json.loads(response.text)
 
+    print(values)
+    print(weather_url)
+
     if json_status == 0:
         print("API Status: " + str(json_status) + " = A successful route call.\n")
     
@@ -70,7 +73,7 @@ while True:
         )
         
     elif event == "Cancel" or event == None:
-     break
+     quit()
             
     elif json_status == 402:
             print("Status Code: " + str(json_status) + "; Invalid user inputs for one or both locations.")
@@ -91,9 +94,10 @@ while True:
                 title = "Something went wrong"
                 
                 )
+            quit()
     
     elif event == 'Cancel' or event == None:
-        break
+        quit()
 
 
     else:
