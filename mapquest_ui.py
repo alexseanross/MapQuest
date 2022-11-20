@@ -97,3 +97,5 @@ while True:
                 title = "Something went wrong"
 
                 )
+
+exit()
