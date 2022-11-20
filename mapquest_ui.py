@@ -4,12 +4,19 @@ import requests
 import json
 import datetime
 
-main_api = "https://www.mapquestapi.com/directions/v2/route?"
-key = "rT6wCu7ekTjG9wRb42Cg4NBJ1SkuF8hs"
+
+#API Key
+openweather_key = "e6e32084500535420729103249e1b405"
+mapquest_key = "rT6wCu7ekTjG9wRb42Cg4NBJ1SkuF8hs"
+ 
+#API URL
+openwather_api = "http://api.openweathermap.org/data/2.5/weather?"
+mapquest_api = "https://www.mapquestapi.com/directions/v2/route?"
 
 sg.theme("BlueMono") #"sg" is the object for the simpoleGUI
 
 x = datetime.datetime.now()
+
 #contains the layout for GUI
 layout = [
 
@@ -18,7 +25,7 @@ layout = [
     [sg.Text('Find out how to get to your destination!')],
     [sg.Text('Your location:', size =(15, 1)), sg.InputText()],#input is automatically assigned to value array
     [sg.Text('Where to?', size =(15, 1)), sg.InputText()],#input is automatically assigned to value array
-    [sg.Submit("Go"), sg.Cancel()]
+    [sg.Submit("Go"), sg.Cancel("Cancel")]
 
 ]
 
@@ -26,34 +33,38 @@ window = sg.Window('Get Directions', layout)#window is sg calling layout. 'Get D
 
 while True: 
     event, values = window.read() # Call window as event
-    url = main_api + urllib.parse.urlencode({"key":key, "from":values[0], "to":values[1]})
+    url = mapquest_api + urllib.parse.urlencode({"key":mapquest_key, "from":values[0], "to":values[1]})
+    weather_url = openwather_api + "appid=" + openweather_key + "&q=" + values[1]
     window.close()
 
+    #MapQuest
     json_data = requests.get(url).json()
-
     json_status = json_data["info"]["statuscode"]
 
+    #OpenWeather
+    response = requests.get(weather_url)
+    data = json.loads(response.text)
 
     if json_status == 0:
         print("API Status: " + str(json_status) + " = A successful route call.\n")
-        "URL: " + (url),
-        "Directions from: " + values[0] + " to " + values[1],
-        "Trip Duration: " + (json_data["route"]["formattedTime"]),
-        "Kilometers: " + str("{:.2f}".format((json_data["route"]["distance"])*1.61)),
+    
+        #Full direction information
         directions = " "
         for each in json_data["route"]["legs"][0]["maneuvers"]:
-            print ((each["narrative"]) + " (" + str ("{:.2f}".format ((each["distance"])*1.61) + " km) "))
             route = (each["narrative"]) + " (" + str ("{:.2f}".format ((each["distance"])*1.61) + " km) ")
             directions = (directions + "\n" + route)
-
+        
         sg.popup_scrolled (
         
-      
-            
         'Directions from ' + values[0] + ' to ' + values[1],
+        "\n"
         "Trip Duration: " + (json_data["route"]["formattedTime"]),
         "Kilometer: " + str ("{:.2f}".format((json_data["route"]["distance"])*1.61)),
+        "\n"
+        "The current temperature in " + values[1] + ': ' + str ("{:.2f}".format((data['main']['temp'])-273.15)) + "°C",
+        "The current weather status in " + values[1] + ': '+ str (data['weather'][0]['description']),
         directions,
+        
         size = (70,15),
         title = "Travel Information"
         )
@@ -80,6 +91,10 @@ while True:
                 title = "Something went wrong"
                 
                 )
+    
+    elif event == 'Cancel' or event == None:
+        break
+
 
     else:
             print("For Staus Code: " + str(json_status) + "; Refer to:")
