@@ -7,3 +7,5 @@ def test_notEmpty():
 def test_location_1_array():
     assert "valenzuela" in mapquest_ui.values
 
+print("No problem with values")
+
